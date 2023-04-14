@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const homerouts = require('./routes/homerouts')
+const authrouts = require('./routes/authrouts')
 const app = express()
 
 const dbURI = 'mongodb+srv://ajala:test@first-cloud-database.iga54vy.mongodb.net/auth_db?retryWrites=true&w=majority'
@@ -16,6 +17,7 @@ app.use(morgan('dev'))
 
 
 //autentication 
+app.use(authrouts)
 
 //home
 app.use(homerouts)
