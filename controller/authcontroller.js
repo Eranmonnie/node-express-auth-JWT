@@ -1,6 +1,22 @@
 const user = require('../models/usermodel')
 const handeler = (err)=>{
-    console.log(err.message, err.code)
+    console.log(err.code)
+    let errors = {
+    "firstname":"",
+    "last name":"",
+    "username":"",
+    "email":"",
+    "password":"",
+    }
+
+    if (err.message.includes('user validation failed')){
+
+    Object.values(err.errors).forEach((error)=>{
+        errors[error.properties.path] = error.properties.message
+    })
+
+    return errors
+}
 }
 
 const login_controller = (req, res)=>{
@@ -22,8 +38,8 @@ const signup_post_controller = async (req, res)=>{
         res.status(201).json(User)
     }
     catch(err){
-        handeler(err)
-        res.status(400).send('error user not created')
+       const error = handeler(err)
+        res.status(400).json({error})
     }
 }
 

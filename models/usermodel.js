@@ -32,7 +32,7 @@ const user_schema = new schema({
         // {
         //   return (true)
         // }
-        // we can use regex loke so to validate email but well use a third party package 
+        // we can use regex like so to validate email but well use a third party package 
 
         validator.isEmail
         , 'please enter a valid email']
