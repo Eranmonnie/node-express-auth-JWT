@@ -1,5 +1,7 @@
 const user = require('../models/usermodel')
-
+const handeler = (err)=>{
+    console.log(err.message, err.code)
+}
 
 const login_controller = (req, res)=>{
 res.render('login')
@@ -20,7 +22,7 @@ const signup_post_controller = async (req, res)=>{
         res.status(201).json(User)
     }
     catch(err){
-        console.log (err)
+        handeler(err)
         res.status(400).send('error user not created')
     }
 }

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const schema  = mongoose.Schema
 
 const user_schema = new schema({
 
       "firstname":{
-            type : String, 
-            required : [true, 'Please enter First name']
+        type : String, 
+        required : [true, 'Please enter First name']
     },
 
       "last name":{
@@ -17,22 +18,23 @@ const user_schema = new schema({
       "username":{
         type : String, 
         required : [true, 'Please enter Username name'],
-        unique : [true, 'User with this username already exists'],
+        unique : true,
     },
 
       "email":{
         type : String, 
         required : [true, 'Please enter email address'],
-        unique : [true, 'User with this email already exists'],
+        unique : true, 
         lowercase : true,
-        validate : [(val)=>{ 
+         validate :[
+         //(val)=>{ 
         //    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val))
         // {
         //   return (true)
         // }
         // we can use regex loke so to validate email but well use a third party package 
-        
-        }
+
+        validator.isEmail
         , 'please enter a valid email']
     },
     
@@ -40,7 +42,7 @@ const user_schema = new schema({
       'password': {
         type : String, 
         required : [true, 'Please enter password'],
-        minLength : [8, 'password must be of length 8 or more'],
+        minlength : [8, 'password must be of length 8 or more'],
     },
 
 })
