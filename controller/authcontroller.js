@@ -1,6 +1,8 @@
 const user = require('../models/usermodel')
 const handeler = (err)=>{
-    console.log(err.code)
+
+    console.log(err.message, err.code)
+
     let errors = {
     "firstname":"",
     "last name":"",
@@ -8,6 +10,19 @@ const handeler = (err)=>{
     "email":"",
     "password":"",
     }
+
+//duplicate value in db for unique keys
+if (err.code === 11000){
+    if (err.message.includes('username_1')){
+        errors.username = 'username is already being used'
+    }
+
+    else if(err.message.includes('email_1')) {
+        errors.email = 'email is already being used'
+    }
+
+    return errors
+}
 
     if (err.message.includes('user validation failed')){
 
