@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcrypt')
 
 const schema  = mongoose.Schema
 
@@ -45,6 +46,14 @@ const user_schema = new schema({
         minlength : [8, 'password must be of length 8 or more'],
     },
 
+})
+
+//actions before or after data has been saved to the db mongoose hooks
+
+user_schema.pre('save', async function(next){
+  const salt =  await bcrypt.genSalt()
+  this.password = await bcrypt.hash(this.password, salt)
+  next()
 })
 
 const user = mongoose.model('user', user_schema)
