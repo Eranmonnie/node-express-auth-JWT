@@ -5,14 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/formstyles.css">
 </head>
 <body>
-    <form action="/login" method="POST" class="formstyle">
-        <label for="username">Username</label>
-        <input type="text" name="username">
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        <button class="buttonstyle">Login</button>
+    <form class="formstyle">
+        <div>
+            <label for="username">User Name</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+
+        <div class="error usernameerror"></div>
+        
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <div class="error passworderror"></div>
+       
+
+        <button class="buttonstyle"> <span style="color: white;">Log In</span></button>
     </form>
+ <script>
+    const form = document.querySelector('.formstyle') //action="/signup"
+
+    form.addEventListener('submit', (e)=>{
+        e.preventDefault()
+        //getting the data from the form 
+        const username = form.username.value
+        const password = form.password.value
+        const url = "/login"
+       console.log(username, password)
+    })
+ </script>
 </body>
 </html>

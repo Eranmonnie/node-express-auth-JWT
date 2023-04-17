@@ -1,8 +1,5 @@
 const user = require('../models/usermodel')
 const handeler = (err)=>{
-
-    console.log(err.message, err.code)
-
     let errors = {
     "firstname":"",
     "last name":"",
