@@ -47,6 +47,18 @@ const signup_controller = (req, res)=>{
 const signup_post_controller = async (req, res)=>{
     try{
         const User =  await user.create(req.body)
+
+        //how to set cookies manually 
+        //res.setHeader("set-cookie", 'newuser = true')
+
+        //using cookie-parser
+        res.cookie('newuser', 'true')
+
+        //when we want to access the cookies in a different controller
+        // const cookies = req.cookies
+        // console.log(cookies)
+        // res.json(cookies)
+
         res.status(201).json(User)
     }
     catch(err){
