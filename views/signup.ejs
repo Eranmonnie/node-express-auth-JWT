@@ -51,7 +51,7 @@
  <script>
     const form = document.querySelector('.formstyle') //action="/signup"
 
-    form.addEventListener('submit', (e)=>{
+    form.addEventListener('submit', async (e)=>{
         e.preventDefault()
         //getting the data from the form 
         const firstname = form.firstname.value
@@ -61,6 +61,26 @@
         const password = form.password.value
         const url = "/signup"
        console.log(firstname, lastname)
+
+       try{
+            const res = await fetch ('/signup',
+                {
+                    method:"POST",
+                    body:JSON.stringify({
+                        "firstname" : firstname,
+                        "last name" : lastname,
+                        "username" : username,
+                        "email" : email,
+                        "password" : password,
+                    }),
+                    headers:{'content-type': 'application/json'},    
+                }
+
+            )
+       }
+       catch(err){
+            console.log(err)
+       }
     })
  </script>
 
