@@ -1,4 +1,6 @@
 const user = require('../models/usermodel')
+const jwt = require('jsonwebtoken')
+
 const handeler = (err)=>{
     let errors = {
     "firstname":"",
@@ -30,6 +32,12 @@ if (err.code === 11000){
     return errors
 }
 }
+const maxage = 3 * 60 * 60 * 24
+const createtoken = (id)=>{
+    return jwt.sign({id}, 'ajala feranmis website', {
+        expiresIn: maxage,
+    })
+}
 
 const login_controller = (req, res)=>{
 res.render('login')
@@ -48,18 +56,14 @@ const signup_post_controller = async (req, res)=>{
     try{
         const User =  await user.create(req.body)
 
-        //how to set cookies manually 
-        //res.setHeader("set-cookie", 'newuser = true')
+        const token =  createtoken(User._id)
 
-        //using cookie-parser
-        res.cookie('newuser', 'true')
-
-        //when we want to access the cookies in a different controller
-        // const cookies = req.cookies
-        // console.log(cookies)
-        // res.json(cookies)
-
-        res.status(201).json(User)
+        res.cookie('newuser', token, {
+            httponly : true,
+            maxage: maxage * 1000,
+        })
+        
+        res.status(201).json({user : User._id})
     }
     catch(err){
        const error = handeler(err)
