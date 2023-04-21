@@ -6,6 +6,6 @@ Express,
 Mongoose, 
 Morgan, 
 Cookie-parser, 
-Jwt, 
+jsonwebtoken, 
 Nodemon, 
 
