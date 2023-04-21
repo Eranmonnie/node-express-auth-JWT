@@ -1,15 +1,6 @@
 const user = require('../models/usermodel')
 const jwt = require('jsonwebtoken')
 
-// const handel_loginerror = (err)=>{
-//     let errors = {
-//         "username":"",
-//         "password":"",
-
-//         if (err.message.includes('username')){
-            
-//         }
-// }
 const handeler = (err)=>{
     let errors = {
     "firstname":"",
@@ -41,6 +32,7 @@ if (err.code === 11000){
     return errors
 }
 }
+
 const maxage = 3 * 60 * 60 * 24
 const createtoken = (id)=>{
     return jwt.sign({id}, 'ajala feranmis website', {
@@ -69,8 +61,10 @@ const login_post_controller = async (req, res)=>{
          res.status(200).json({user : User._id})
     }
     catch(err){
-        console.log(err)
-        // const erroer = handel_loginerror(err)
+        console.log(err.message)
+        // const error = handeler(err)
+        
+        
         
     }
 }
