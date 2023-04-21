@@ -1,6 +1,15 @@
 const user = require('../models/usermodel')
 const jwt = require('jsonwebtoken')
 
+// const handel_loginerror = (err)=>{
+//     let errors = {
+//         "username":"",
+//         "password":"",
+
+//         if (err.message.includes('username')){
+            
+//         }
+// }
 const handeler = (err)=>{
     let errors = {
     "firstname":"",
@@ -43,9 +52,27 @@ const login_controller = (req, res)=>{
 res.render('login')
 }
 
-const login_post_controller = (req, res)=>{
-    const {email, password} = req.body
-    console.log(email, password)
+const login_post_controller = async (req, res)=>{
+    const password = req.body.password
+    const username = req.body.username
+    
+
+    try{
+        const User = await user.login(username, password)
+        const token =  createtoken(User._id)
+
+        res.cookie('newuser', token, {
+             httponly : true,
+             maxage: maxage * 1000,
+         })
+
+         res.status(200).json({user : User._id})
+    }
+    catch(err){
+        console.log(err)
+        // const erroer = handel_loginerror(err)
+        
+    }
 }
 
 const signup_controller = (req, res)=>{
@@ -62,7 +89,7 @@ const signup_post_controller = async (req, res)=>{
             httponly : true,
             maxage: maxage * 1000,
         })
-        
+
         res.status(201).json({user : User._id})
     }
     catch(err){

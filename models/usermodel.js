@@ -56,6 +56,21 @@ user_schema.pre('save', async function(next){
   next()
 })
 
+//static method on model for login better to have dedicated functions to handel these tasks 
+user_schema.statics.login = async function(username , password){
+    
+      const User = await this.findOne({"username" : username})
+
+      if (User){
+       const auth = await bcrypt.compare(password, User.password)
+       if (auth){
+        return User
+       }
+       throw Error('incorrect password')
+      }
+      throw Error('incorrect username')
+}
+
 const user = mongoose.model('user', user_schema)
 
 module.exports = user

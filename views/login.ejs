@@ -14,28 +14,59 @@
             <input type="text" name="username" id="username" required>
         </div>
 
-        <div class="error usernameerror"></div>
+        <div class="error username"></div>
         
         <div>
             <label for="password">Password</label>
             <input type="password" name="password" required>
         </div>
 
-        <div class="error passworderror"></div>
+        <div class="error password"></div>
        
 
         <button class="buttonstyle"> <span style="color: white;">Log In</span></button>
     </form>
  <script>
     const form = document.querySelector('.formstyle') //action="/signup"
+    const usernameError =  document.querySelector('.error.username')
+    const passwordError =  document.querySelector('.error.password')
 
-    form.addEventListener('submit', (e)=>{
+    form.addEventListener('submit', async (e)=>{
         e.preventDefault()
+        
+        usernameError.textContent = ""
+        passwordError.textContent =  ""
+
         //getting the data from the form 
         const username = form.username.value
         const password = form.password.value
-        const url = "/login"
-       console.log(username, password)
+  
+        try{
+            const res = await fetch ('/login',
+                {
+                    method:"POST",
+                    body:JSON.stringify({
+                        "username" : username,
+                        "password" : password,
+                    }),
+                    headers:{'content-type': 'application/json'},    
+                }
+
+            )
+
+       const data = await res.json()
+       console.log(data)
+       if (data.error){
+            usernameError.textContent = data.error.username 
+            passwordError.textContent = data.error.password 
+       }
+    //    if (data.user){
+    //         location.assign('/')
+    //    }
+    }
+    catch(err){
+       
+    }
     })
  </script>
 </body>
