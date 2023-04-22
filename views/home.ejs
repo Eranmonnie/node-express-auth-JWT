@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/homestyle.css">
-</head>
-<body>
-    <nav class="vavstyle">
-        <div class="sty">
-            <h3>Blueprint</h3>
-        </div>
-        
-      
+<%- include('./partials/header.ejs') %>
 
-        <ul class="list2">
-            <li>Signup</li>
-            <li>Login</li>
-            <li>Logout</li>
-        </ul>
-    </nav>
-    <h1>Welcome <?= user.firstname?> </h1>
+    <h1 class="heading"><span style="color:#5B84B1FF;">welcome</span> <?= user.firstname?> </h1>
 
+    <div class="section1">
+       <div class="image">
+        <img src="/23520223-vector-many-coloured-fingerprint-on-white-background.webp" alt="fingerprint">
+       </div>
+       <div class="words">
+        <h2>Blue<span style="color:#5B84B1FF;">print</span></h2>
+        <h3><span style="color:#5B84B1FF;">By</span> eranmonnie</h3>
+        <a href="#"><span style="color: #000;; background-color: rgb(240, 130, 120); padding: 1em; font-size: small; border-radius: 3em; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">View fingerprints</span></a>
+       </div>
+    </div>
 </body>
 </html>
