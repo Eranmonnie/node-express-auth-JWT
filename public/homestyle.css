@@ -1,0 +1,37 @@
+h1{
+    font-family:cursive;
+    text-align: center;
+}
+img{
+    width:4em;
+    height: 3em;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    
+}
+
+.list2{
+    font-family:cursive;
+    display: flex;
+   gap: 2em;
+    list-style: none;
+    padding-right: 2em;  
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.sty{
+   font-family:cursive;
+}
+.sty h3{
+    margin: 0;
+    font-size: 2em;
+    padding-left: 1em;
+    font-weight: bold;
+}
