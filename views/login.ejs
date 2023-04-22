@@ -55,14 +55,15 @@
             )
 
        const data = await res.json()
-       console.log(data)
+    //    console.log(data)
        if (data.error){
             usernameError.textContent = data.error.username 
             passwordError.textContent = data.error.password 
        }
-    //    if (data.user){
-    //         location.assign('/')
-    //    }
+       
+       if (data.user){
+           location.assign('/')
+       }
     }
     catch(err){
        

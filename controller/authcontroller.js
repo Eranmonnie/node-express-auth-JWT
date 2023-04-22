@@ -10,6 +10,18 @@ const handeler = (err)=>{
     "password":"",
     }
 
+//login auth condition
+if (err.message ==='incorrect username'){
+    errors.username = "username is not registered"
+   
+}
+
+if (err.message ==='incorrect password'){
+    errors.password = 'incorect password'
+    
+}
+
+
 //duplicate value in db for unique keys
 if (err.code === 11000){
     if (err.message.includes('username_1')){
@@ -19,9 +31,9 @@ if (err.code === 11000){
     else if(err.message.includes('email_1')) {
         errors.email = 'email is already being used'
     }
+    
 
-    return errors
-}
+   }
 
     if (err.message.includes('user validation failed')){
 
@@ -29,8 +41,11 @@ if (err.code === 11000){
         errors[error.properties.path] = error.properties.message
     })
 
-    return errors
-}
+   }
+
+return errors
+
+
 }
 
 const maxage = 3 * 60 * 60 * 24
@@ -61,11 +76,9 @@ const login_post_controller = async (req, res)=>{
          res.status(200).json({user : User._id})
     }
     catch(err){
-        console.log(err.message)
-        // const error = handeler(err)
-        
-        
-        
+    const error = handeler(err)
+    // console.log(error)
+    res.status(400).json({error})  
     }
 }
 
@@ -87,7 +100,8 @@ const signup_post_controller = async (req, res)=>{
         res.status(201).json({user : User._id})
     }
     catch(err){
-       const error = handeler(err)
+        const error = handeler(err)
+        console.log(error)
         res.status(400).json({error})
     }
 }
