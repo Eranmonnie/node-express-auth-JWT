@@ -49,6 +49,8 @@ return errors
 }
 
 const maxage = 3 * 60 * 60 * 24
+
+//create web token 
 const createtoken = (id)=>{
     return jwt.sign({id}, 'ajala feranmis website', {
         expiresIn: maxage,
