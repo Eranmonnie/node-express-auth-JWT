@@ -108,9 +108,16 @@ const signup_post_controller = async (req, res)=>{
     }
 }
 
+//loging users out 
+const logout = (req, res)=>{
+    res.cookie('newuser', '', {maxage: 1,})
+    res.redirect('/')
+}
+
 module.exports = {
     login_controller,
     login_post_controller,
     signup_controller,
     signup_post_controller,
+    logout,
 }
